@@ -8,4 +8,4 @@ It can convert CAS to other identifiers
 
 It provides the ontology informations given the smiles information
 
-It can perform smilar converstions from most widely used identifiers
+It can perform smilar conversions from most widely used identifiers
