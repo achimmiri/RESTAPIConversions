@@ -153,6 +153,7 @@ ConvINKtoOID<-function(getINK)
 ##########################################################################
 ClassSmilesToOntolgy<-function(getSMILE)
 {
+  #### Function returns Ontology information given smiles information
   #####################
   url="https://gnps-structure.ucsd.edu/classyfire?smiles="
   url1=paste0(url,getSMILE)
@@ -166,6 +167,7 @@ ClassSmilesToOntolgy<-function(getSMILE)
 ########################################################################
 ConvHMDBtoOCN<-function(getHMDB)
 {
+  #### Function returns InchiKey,smiles,pubchem_CID,exactmass,formula given HMDB information
   url<- "https://www.metabolomicsworkbench.org/rest/compound/hmdb_id/"
   out<-tryCatch({jsonlite::fromJSON(paste0(url,getHMDB, "/all"))}, warning = function(x) {return(NA)})
   #########################
