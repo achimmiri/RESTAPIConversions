@@ -1,14 +1,16 @@
+library(devtools)
 library(jsonlite)
 library("hmdbQuery")
 library("digest")
 library("RMassBank")
-library(devtools)
 library("MetaboAnalystR")
 library("janitor")
 
 ##### REST API Functions
 ##########################################################
 ##########################################################
+##out <- cts_compinfo(PuInKtoSM(getINK))
+##str(out)
 PuInKtoSM<-function(getINK)
 {
   ########## Functions return canoncial smiles	
@@ -30,6 +32,8 @@ PuInKtoSM<-function(getINK)
 }
 ############################################################
 ############################################################
+##out1 <- PuInKtoSM1(getINK)
+##str(out1)
 PuInKtoSM1<-function(getINK)
 {
   ###### Functions return Isomeric smiles
@@ -51,6 +55,8 @@ PuInKtoSM1<-function(getINK)
 }
 ##########################################################################
 ###########################################################################
+##out2 <- PuCIDtoEM(getCID)
+##str(out2)
 PuCIDtoEM<-function(getCID)
 {
   ##### Function returns Compound ID to exact mass
@@ -92,6 +98,8 @@ PuCIDtoEM<-function(getCID)
 }
 ###########################################################################
 ###########################################################################
+###out3<-PuCAStoOI(getCAS)
+##print(out3)
 PuCAStoOI<-function(getCAS)
 {
   ###CAS: 328-50-7
@@ -115,6 +123,8 @@ PuCAStoOI<-function(getCAS)
 }
 #########################################################################
 #########################################################################
+###out4<-ConvPCIDtoOCN(getPCID)
+###print(out4)
 ConvPCIDtoOCN<-function(getPCID)
 {
   #### Function returns CompoundID to other formats like inchikey,smiles,pubchem_cid,exactmass, formula	
@@ -133,6 +143,8 @@ ConvPCIDtoOCN<-function(getPCID)
 }
 ##########################################################################
 ###########################################################################
+###out5<-ConvINKtoOID(getINK)
+###print(out5)
 ConvINKtoOID<-function(getINK)
 {
   #### Function returns inchi_key to other formats like smiles,pubchem_cid,exactmass,formula	
@@ -151,6 +163,8 @@ ConvINKtoOID<-function(getINK)
 }
 ##########################################################################
 ##########################################################################
+###out6<-ClassSmilesToOntolgy(getSMILE)
+###print(out6)
 ClassSmilesToOntolgy<-function(getSMILE)
 {
   #### Function returns Ontology information given smiles information
@@ -165,6 +179,8 @@ ClassSmilesToOntolgy<-function(getSMILE)
 }
 ########################################################################
 ########################################################################
+###out7<-ConvHMDBtoOCN(getHMDB)
+###print(out7)
 ConvHMDBtoOCN<-function(getHMDB)
 {
   #### Function returns InchiKey,smiles,pubchem_CID,exactmass,formula given HMDB information
@@ -183,3 +199,17 @@ ConvHMDBtoOCN<-function(getHMDB)
 }
 #########################################################################
 #########################################################################
+###out8<-PuSMtoCID(getSMILES)
+###print(out8)
+PuSMtoCID<-function(getSMILES)
+{
+  #### Function returns compoundID's from smiles	
+  url<-"https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/smiles/"
+
+  out<-tryCatch({jsonlite::fromJSON(paste0(url,getSMILES, "/cids"))} ,error = function(x) {return(NA)})
+
+  return(tryCatch({out[[1]]$CID},error = function(x) {return(NA)}))
+
+}
+#############################################################################
+###############################################################################
